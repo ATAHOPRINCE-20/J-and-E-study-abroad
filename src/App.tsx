@@ -31,6 +31,12 @@ function App() {
 }
 
 function Layout({ scrolled }: { scrolled: boolean }) {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <Header scrolled={scrolled} />

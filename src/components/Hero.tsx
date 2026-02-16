@@ -4,10 +4,18 @@ import { Link } from 'react-router';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import hero1 from '../assets/group-five-african-college-students-spending-time-together-campus-university-yard-black-afro-friends-studying-bench-with-school-items-laptops-notebooks.jpg';
 
-export function Hero() {
+interface HeroProps {
+  title?: string;
+  subtitle?: string;
+  image?: string;
+  ctaText?: string;
+  isStatic?: boolean;
+}
+
+export function Hero({ title, subtitle, image, ctaText, isStatic }: HeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const slides = [
+  const defaultSlides = [
     {
       image: hero1,
       title: 'Study at World-Class Universities',
@@ -20,31 +28,44 @@ export function Hero() {
       image: 'https://images.unsplash.com/photo-1758270704524-596810e891b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwc3R1ZGVudHMlMjBjYW1wdXMlMjBkaXZlcnNlfGVufDF8fHx8MTc2OTI2NzU2N3ww&ixlib=rb-4.1.0&q=80&w=1080',
       title: 'Study in World-Class Universities',
       subtitle: 'Access top institutions across UK, USA, Canada, and Europe',
-      badge: 'Find Your Potential',
       ctaText: 'Get Started Today',
+      badge: 'Find Your Potential',
+      trustText: '',
     },
     {
       image: 'https://images.unsplash.com/photo-1591218214141-45545921d2d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmFkdWF0aW9uJTIwY2VyZW1vbnklMjBzdHVkZW50cyUyMGNlbGVicmF0aW5nfGVufDF8fHx8MTc2OTI2NzU2OHww&ixlib=rb-4.1.0&q=80&w=1080',
       title: 'Your Success is Our Mission',
       subtitle: '98% success rate with 1000+ students placed worldwide',
-      badge: 'Find Your Potential',
       ctaText: 'Get Started Today',
+      badge: 'Success First',
+      trustText: '',
     },
     {
       image: 'https://images.unsplash.com/photo-1544002176-eacb96b939c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB1bml2ZXJzaXR5JTIwbGlicmFyeSUyMHN0dWRlbnRzfGVufDF8fHx8MTc2OTI2NzU2OHww&ixlib=rb-4.1.0&q=80&w=1080',
       title: 'Expert Guidance Every Step',
       subtitle: 'From career counseling to visa assistance and beyond',
-      badge: 'Find Your Potential',
       ctaText: 'Get Started Today',
+      badge: 'Expert Support',
+      trustText: '',
     },
   ];
 
+  const slides = isStatic ? [{
+    image: image || defaultSlides[0].image,
+    title: title || defaultSlides[0].title,
+    subtitle: subtitle || defaultSlides[0].subtitle,
+    ctaText: ctaText || defaultSlides[0].ctaText,
+    badge: '',
+    trustText: '',
+  }] : defaultSlides;
+
   useEffect(() => {
+    if (isStatic) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 10000);
     return () => clearInterval(timer);
-  }, [slides.length]);
+  }, [isStatic, slides.length]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);

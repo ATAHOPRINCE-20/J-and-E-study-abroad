@@ -9,6 +9,13 @@ import { DestinationsPage } from "./pages/DestinationsPage";
 import { TestimonialsPage } from "./pages/TestimonialsPage";
 import { NewsPage } from "./pages/NewsPage";
 import { ContactPage } from "./pages/ContactPage";
+import { WhyStudyAustralia } from "./pages/AustraliaDestinationPage";
+import { CanadaDestinationPage } from "./pages/CanadaDestinationPage";
+import { IrelandDestinationPage } from "./pages/IrelandDestinationPage";
+import { UKDestinationPage } from "./pages/UKDestinationPage";
+import { USADestinationPage } from "./pages/USADestinationPage";
+import { GermanyDestinationPage } from "./pages/GermanyDestinationPage";
+import { NewZealandDestinationPage } from "./pages/NewZealandDestinationPage";
 import { useState, useEffect } from "react";
 
 function App() {
@@ -47,6 +54,13 @@ function Layout({ scrolled }: { scrolled: boolean }) {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/services/:serviceId" element={<ServiceDetailPage />} />
           <Route path="/destinations" element={<DestinationsPage />} />
+          <Route path="/destinations/australia" element={<WhyStudyAustralia />} />
+          <Route path="/destinations/canada" element={<CanadaDestinationPage />} />
+          <Route path="/destinations/ireland" element={<IrelandDestinationPage />} />
+          <Route path="/destinations/uk" element={<UKDestinationPage />} />
+          <Route path="/destinations/usa" element={<USADestinationPage />} />
+          <Route path="/destinations/germany" element={<GermanyDestinationPage />} />
+          <Route path="/destinations/newzealand" element={<NewZealandDestinationPage />} />
           <Route path="/testimonials" element={<TestimonialsPage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/contact" element={<ContactPage />} />

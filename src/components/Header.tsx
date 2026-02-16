@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link, useLocation } from 'react-router';
 import LogoDefault from '../assets/logo3.png';
 import LogoAlt from '../assets/logo1.png';
@@ -8,8 +8,21 @@ interface HeaderProps {
   scrolled?: boolean;
 }
 
+const destinationLinks = [
+  { label: 'All Destinations', href: '/destinations' },
+  { label: 'Study in Canada', href: '/destinations/canada' },
+  { label: 'Study in Australia', href: '/destinations/australia' },
+  { label: 'Study in Ireland', href: '/destinations/ireland' },
+  { label: 'Study in UK', href: '/destinations/uk' },
+  { label: 'Study in USA', href: '/destinations/usa' },
+  { label: 'Study in Germany', href: '/destinations/germany' },
+  { label: 'Study in New Zealand', href: '/destinations/newzealand' },
+];
+
 export function Header({ scrolled }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(true);
   const location = useLocation();
 
   const navLinks = [
@@ -41,30 +54,65 @@ export function Header({ scrolled }: HeaderProps) {
                 }
               }}
             />
-            {/* <div className="hidden sm:block">
-              <div className="text-[#6B2C3E] font-bold text-base leading-tight">
-                J&E STUDY ABROAD
-              </div>
-              <div className="text-[#6B2C3E] text-xs tracking-wide">COMPANY LIMITED</div>
-            </div> */}
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={`text-sm font-medium transition-colors relative group ${
-                  isActive(link.href) ? 'text-[#6B2C3E]' : 'text-gray-700 hover:text-[#6B2C3E]'
-                }`}
-              >
-                {link.label}
-                <span className={`absolute bottom-0 left-0 h-0.5 bg-[#6B2C3E] transition-all duration-300 ${
-                  isActive(link.href) ? 'w-full' : 'w-0 group-hover:w-full'
-                }`}></span>
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              if (link.label === 'Study Destinations') {
+                return (
+                  <div 
+                    key={link.href} 
+                    className="relative"
+                    onMouseEnter={() => setDropdownOpen(true)}
+                    onMouseLeave={() => setDropdownOpen(false)}
+                  >
+                    <Link 
+                      to="/destinations"
+                      className={`text-sm font-medium transition-colors flex items-center gap-1 py-8 ${
+                        location.pathname.startsWith('/destinations') ? 'text-[#6B2C3E]' : 'text-gray-700 hover:text-[#6B2C3E]'
+                      }`}
+                    >
+                      {link.label}
+                      <ChevronDown 
+                        className="w-4 h-4 transition-transform" 
+                        style={{ transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                      />
+                    </Link>
+                    {dropdownOpen && (
+                      <div 
+                        className="absolute left-0 w-56" 
+                        style={{ top: '100%', zIndex: 100 }}
+                      >
+                        <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden py-2">
+                          {destinationLinks.map((dest) => (
+                            <Link
+                              key={dest.label}
+                              to={dest.href}
+                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#6B2C3E]"
+                              onClick={() => setDropdownOpen(false)}
+                            >
+                              {dest.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              return (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className={`text-sm font-medium transition-colors relative ${
+                    isActive(link.href) ? 'text-[#6B2C3E]' : 'text-gray-700 hover:text-[#6B2C3E]'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* CTA Button */}
@@ -91,16 +139,45 @@ export function Header({ scrolled }: HeaderProps) {
           <div className="lg:hidden py-4 border-t border-gray-100">
             <nav className="flex flex-col gap-4">
               {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-sm font-medium transition-colors ${
-                    isActive(link.href) ? 'text-[#6B2C3E]' : 'text-gray-700 hover:text-[#6B2C3E]'
-                  }`}
-                >
-                  {link.label}
-                </Link>
+                  link.label === 'Study Destinations' ? (
+                    <div key={link.href} className="flex flex-col gap-2">
+                       <button 
+                        className={`text-sm font-medium text-left flex items-center gap-1 ${isActive('/destinations') ? 'text-[#6B2C3E]' : 'text-gray-700'}`}
+                        onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+                       >
+                         {link.label}
+                         <ChevronDown 
+                           className="w-4 h-4 transition-transform" 
+                           style={{ transform: mobileDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                         />
+                       </button>
+                       {mobileDropdownOpen && (
+                         <div className="pl-4 flex flex-col gap-2 border-l border-gray-100 ml-1">
+                           {destinationLinks.map((dest) => (
+                             <Link 
+                               key={dest.label} 
+                               to={dest.href} 
+                               onClick={() => setMobileMenuOpen(false)} 
+                               className="text-sm text-gray-600"
+                             >
+                               {dest.label}
+                             </Link>
+                           ))}
+                         </div>
+                       )}
+                    </div>
+                  ) : (
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`text-sm font-medium transition-colors ${
+                        isActive(link.href) ? 'text-[#6B2C3E]' : 'text-gray-700 hover:text-[#6B2C3E]'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  )
               ))}
               <Link
                 to="/contact"

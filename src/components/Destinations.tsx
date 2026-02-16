@@ -6,9 +6,37 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 export function Destinations() {
   const [activeCountry, setActiveCountry] = useState('IRELAND');
 
-  const countries = ['IRELAND', 'CANADA', 'UNITED KINGDOM', 'UNITED STATES', 'GERMANY'];
+  const countries = ['AUSTRALIA', 'CANADA', 'IRELAND', 'UNITED KINGDOM', 'UNITED STATES', 'GERMANY', 'NEW ZEALAND'];
 
   const destinationsData = {
+    AUSTRALIA: {
+      featured: [
+        {
+          image: 'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+          name: 'The University of Sydney',
+          country: 'AUSTRALIA',
+          description: 'The University of Sydney is a public research university in Sydney, Australia. Founded in 1850, it is Australia\'s oldest university and is regarded as one of the world\'s leading universities...',
+        },
+        {
+          image: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9',
+          name: 'University of Melbourne',
+          country: 'AUSTRALIA',
+          description: 'The University of Melbourne is a public research university located in Melbourne, Australia. Founded in 1853, it is Australia\'s second oldest university and the oldest in Victoria...',
+        },
+      ],
+      list: [
+        {
+          image: 'https://images.unsplash.com/photo-1529143642335-716492576b2e',
+          name: 'Monash University',
+          country: 'AUSTRALIA',
+        },
+        {
+          image: 'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be',
+          name: 'UNSW Sydney',
+          country: 'AUSTRALIA',
+        },
+      ],
+    },
     IRELAND: {
       featured: [
         {
@@ -129,6 +157,34 @@ export function Destinations() {
         },
       ],
     },
+    'NEW ZEALAND': {
+      featured: [
+        {
+          image: 'https://images.unsplash.com/photo-1507699622108-4be3abd695ad',
+          name: 'University of Auckland',
+          country: 'NEW ZEALAND',
+          description: 'The University of Auckland is a public research university based in Auckland, New Zealand. It is the largest, most comprehensive and highest-ranked university in New Zealand...',
+        },
+        {
+          image: 'https://images.unsplash.com/photo-1477505982272-ead89926a577',
+          name: 'University of Otago',
+          country: 'NEW ZEALAND',
+          description: 'The University of Otago is a collegiate university located in Dunedin, Otago, New Zealand. It scores highly for average research quality, and in 2006 was second in New Zealand...',
+        },
+      ],
+      list: [
+        {
+          image: 'https://images.unsplash.com/photo-1589802829985-817e5113933c',
+          name: 'Victoria University of Wellington',
+          country: 'NEW ZEALAND',
+        },
+        {
+          image: 'https://images.unsplash.com/photo-1523050335392-9bc5675e4739',
+          name: 'University of Canterbury',
+          country: 'NEW ZEALAND',
+        },
+      ],
+    },
   };
 
   const currentData = destinationsData[activeCountry as keyof typeof destinationsData];
@@ -192,9 +248,12 @@ export function Destinations() {
                   <p className="text-sm text-gray-600 leading-relaxed mb-4">
                     {university.description}
                   </p>
-                  <button className="px-6 py-2 text-sm font-semibold text-[#0A7EA4] border-2 border-[#0A7EA4] rounded-full hover:bg-[#0A7EA4] hover:text-white transition-all">
+                  <Link 
+                    to={`/destinations/${activeCountry.toLowerCase().replace(/\s+/g, '')}`}
+                    className="px-6 py-2 text-sm font-semibold text-[#0A7EA4] border-2 border-[#0A7EA4] rounded-full hover:bg-[#0A7EA4] hover:text-white transition-all inline-block"
+                  >
                     See Details
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -220,10 +279,13 @@ export function Destinations() {
                     <h4 className="text-sm font-bold text-gray-900 mb-2">
                       {university.name}
                     </h4>
-                    <button className="inline-flex items-center gap-1 text-xs font-semibold text-[#0A7EA4] hover:gap-2 transition-all">
+                    <Link 
+                      to={`/destinations/${activeCountry.toLowerCase().replace(/\s+/g, '')}`}
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-[#0A7EA4] hover:gap-2 transition-all"
+                    >
                       Learn More
                       <ArrowRight className="w-3 h-3" />
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>

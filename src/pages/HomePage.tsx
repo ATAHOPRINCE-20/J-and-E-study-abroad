@@ -12,7 +12,7 @@ export function HomePage() {
       <About />
       <Services limit={3} showViewAll={true} />
       <StatsCounter />
-      <Destinations />
+      <Destinations limit={3} />
       <Testimonials />
     </>
   );

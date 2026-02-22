@@ -166,7 +166,7 @@ export function ContactPage() {
 
           <div className="max-w-6xl mx-auto">
             {!showThankYou ? (
-              <div className="bg-[#1e3a47]/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-teal-500/20 overflow-hidden">
+              <div className="bg-[#1e3a47]/80 backdrop-blur-xl rounded-3xl shadow-xl border border-teal-500/20 overflow-hidden">
                 <div className="grid lg:grid-cols-3 gap-0">
                   {/* Step Sidebar - LEFT COLUMN */}
                   <div className="bg-[#152b35]/50 p-6 border-r border-teal-500/20">
@@ -508,7 +508,7 @@ export function ContactPage() {
             )}
           </div>
 
-          {/* Trust Indicators Section */}
+          {/* Trust Indicators Section
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -536,6 +536,16 @@ export function ContactPage() {
                 </div>
               </div>
             </div>
+          </motion.div> */}
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16 mt-12"
+          >
+            <h2 className="text-4xl font-bold text-black">Locate us at</h2>
           </motion.div>
 
           {/* Contact Layout: Map (Left) & Info (Right) */}
@@ -607,12 +617,12 @@ export function ContactPage() {
           >
             <div className="text-center mb-8">
               <h3 className="text-3xl font-bold text-white mb-2">Frequently Asked Questions</h3>
-              <p className="text-xl font-semibold text-teal-400">Quick answers to common questions about studying abroad</p>
+              <p className="text-xl font-semibold text-teal-400">Frequently Asked Questions</p>
             </div>
             <FAQAccordion />
           </motion.div>
 
-          {/* Social Connectivity Card */}
+          {/* Social Connectivity Card
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -622,7 +632,7 @@ export function ContactPage() {
           >
             <div className="bg-gradient-to-r from-teal-500/10 to-cyan-500/10 backdrop-blur-lg p-8 rounded-2xl border border-teal-500/20">
               <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-black mb-2">Prefer to Chat Directly?</h3>
+                <h3 className="text-2xl font-bold text-white mb-2">Prefer to Chat Directly?</h3>
                 <p className="text-gray-400">Connect with us on your favorite platform</p>
               </div>
               <div className="flex flex-wrap justify-center gap-4">
@@ -630,7 +640,7 @@ export function ContactPage() {
                   href="https://wa.me/256788232695"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-6 py-3 bg-[#25D366] hover:bg-[#20BA5A] text-black rounded-lg transition-all hover:scale-105 shadow-lg"
+                  className="flex items-center gap-3 px-6 py-3 bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-lg transition-all hover:scale-105 shadow-lg"
                 >
                   <MessageCircle className="w-5 h-5" />
                   <span className="font-semibold">WhatsApp</span>
@@ -639,14 +649,14 @@ export function ContactPage() {
                   href="https://www.linkedin.com/company/jestudyabroad"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-6 py-3 bg-[#0A66C2] hover:bg-[#004182] text-black rounded-lg transition-all hover:scale-105 shadow-lg"
+                  className="flex items-center gap-3 px-6 py-3 bg-[#0A66C2] hover:bg-[#004182] text-white rounded-lg transition-all hover:scale-105 shadow-lg"
                 >
                   <Linkedin className="w-5 h-5" />
                   <span className="font-semibold">LinkedIn</span>
                 </a>
               </div>
             </div>
-          </motion.div>
+          </motion.div> */}
         </div>
       </section>
     </div>

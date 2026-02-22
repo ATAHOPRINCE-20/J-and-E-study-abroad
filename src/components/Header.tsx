@@ -29,7 +29,6 @@ export function Header({ scrolled }: HeaderProps) {
     { label: 'About Us', href: '/about' },
     { label: 'Services', href: '/services' },
     { label: 'Study Destinations', href: '/destinations' },
-    { label: 'Testimonials', href: '/testimonials' },
     { label: 'News', href: '/news' },
     { label: 'Contact', href: '/contact' },
   ];
@@ -142,7 +141,7 @@ export function Header({ scrolled }: HeaderProps) {
                   link.label === 'Study Destinations' ? (
                     <div key={link.href} className="flex flex-col gap-2">
                        <button 
-                        className={`text-sm font-medium text-left flex items-center gap-1 ${isActive('/destinations') ? 'text-[#6B2C3E]' : 'text-gray-700'}`}
+                        className={`text-sm font-medium text-left flex items-center gap-1 ${location.pathname.startsWith('/destinations') ? 'text-[#6B2C3E]' : 'text-gray-700'}`}
                         onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
                        >
                          {link.label}

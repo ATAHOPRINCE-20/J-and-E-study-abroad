@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { Quote } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function Testimonials() {
@@ -49,13 +49,6 @@ export function Testimonials() {
     return () => clearInterval(interval);
   }, [testimonials.length]);
 
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
 
   const currentTestimonial = testimonials[currentIndex];
 
@@ -104,23 +97,6 @@ export function Testimonials() {
               {/* Quote Icon */}
               <Quote className="absolute top-4 sm:top-6 left-4 sm:left-6 w-6 h-6 sm:w-8 sm:h-8 text-[#D4A574]/30" />
 
-              {/* Navigation Arrows */}
-              <div className="absolute top-1/2 -translate-y-1/2 -left-4 sm:-left-6 lg:-left-8">
-                <button
-                  onClick={prevTestimonial}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#D4A574] text-white shadow-lg flex items-center justify-center hover:scale-110 hover:bg-[#C4956A] transition-all"
-                >
-                  <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-                </button>
-              </div>
-              <div className="absolute top-1/2 -translate-y-1/2 -right-4 sm:-right-6 lg:-right-8">
-                <button
-                  onClick={nextTestimonial}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#D4A574] text-white shadow-lg flex items-center justify-center hover:scale-110 hover:bg-[#C4956A] transition-all"
-                >
-                  <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-                </button>
-              </div>
 
               {/* Testimonial Text */}
               <p className="text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8 pl-6 sm:pl-8">
